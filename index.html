@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TV Masjid - Jadwal Shalat</title>
+  <link rel="stylesheet" href="TVDISPLAY.CSS" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- WRAPPER KONTEN UTAMA -->
+    <div class="content-wrapper">
+      <!-- Judul Masjid -->
+      <div class="masjid-name">MASJID DAARUL MULTAZIMIIN</div>
+
+      <!-- Wrapper Jadwal & Countdown -->
+      <div class="jadwal-wrapper">
+
+        <!-- Kartu Jadwal Shalat -->
+        <div class="jadwal-shalat">
+          <div class="jadwal-card">
+            <div class="judul-shalat">
+              <img src="assets/shubuh.png" alt="icon" />
+              <strong>SHUBUH</strong>
+            </div>
+            <hr />
+            <span id="shubuh">--:--</span>
+          </div>
+
+          <div class="jadwal-card">
+            <div class="judul-shalat">
+              <img src="assets/dzuhur.png" alt="icon" />
+              <strong>DZUHUR</strong>
+            </div>
+            <hr />
+            <span id="dzuhur">--:--</span>
+          </div>
+
+          <div class="jadwal-card">
+            <div class="judul-shalat">
+              <img src="assets/ashar.png" alt="icon" />
+              <strong>ASHAR</strong>
+            </div>
+            <hr />
+            <span id="ashar">--:--</span>
+          </div>
+
+          <div class="jadwal-card">
+            <div class="judul-shalat">
+              <img src="assets/magrib.png" alt="icon" />
+              <strong>MAGHRIB</strong>
+            </div>
+            <hr />
+            <span id="maghrib">--:--</span>
+          </div>
+
+          <div class="jadwal-card">
+            <div class="judul-shalat">
+              <img src="assets/isya.png" alt="icon" />
+              <strong>ISYA</strong>
+            </div>
+            <hr />
+            <span id="isya">--:--</span>
+          </div>
+        </div>
+
+        <!-- Countdown -->
+        <div class="waktu-menuju">
+          <div class="countdown-angka" id="countdown">--:--:--</div>
+          <div class="countdown-label">
+            Waktu Menuju <span id="next-shalat">---</span>
+          </div>
+        </div>
+      </div> <!-- /.jadwal-wrapper -->
+    </div> <!-- /.content-wrapper -->
+
+    <!-- QUOTE CAROUSEL DI LUAR content-wrapper -->
+    <div class="quote">
+      <div id="quote-carousel">
+        <div class="quote-item active">Memuat kutipan inspiratif...</div>
+      </div>
+    </div>
+
+    <!-- ✅ QRIS Frame di Tengah -->
+    <div class="qris-frame">
+      <div class="qris-title">QRIS INFAQ</div>
+      <img src="assets/qriscode.png" alt="QRIS Code" class="qris-img" />
+    </div>
+
+  </div> <!-- /.container -->
+
+  <!-- Text Berjalan -->
+  <div class="slider-text">
+    <span>
+      Scan QRIS code bagi yang ingin ber-infaq • Scan QRIS code bagi yang ingin ber-infaq •
+      Scan QRIS code bagi yang ingin ber-infaq • Scan QRIS code bagi yang ingin ber-infaq •
+      Scan QRIS code bagi yang ingin ber-infaq • Scan QRIS code bagi yang ingin ber-infaq
+    </span>
+  </div>
+
+  <!-- === Audio Adzan === -->
+  <audio id="adzan-audio" src="assets/adzan.mp3" preload="auto" muted></audio>
+
+  <!-- Script -->
+  <script src="TVDISPLAY.JS"></script>
+</body>
+</html>
