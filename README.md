@@ -10,6 +10,26 @@ Proyek ini merupakan sistem digital untuk menampilkan **jadwal shalat harian**, 
 - 📜 **Quote Islami Otomatis**: Menampilkan carousel kutipan Islami yang berubah setiap 15 detik.
 - 🎨 **Desain dan Responsif**: Dengan latar Masjid Nabawi dan elemen desain yang mendukung nuansa spiritual.
 
+## 🗂 Struktur Folder
+
+tv-masjid-display/
+│
+├── index.html               # Halaman utama TV display masjid
+├── TVDISPLAY.CSS            # Gaya tampilan (CSS)
+├── TVDISPLAY.JS             # Logika JavaScript: jadwal, countdown, carousel
+│
+├── bg-nabawi.jpg            # Background tampilan utama
+├── bling-stars.png          # Hiasan bintang untuk carousel quote
+│
+├── shubuh.png               # Icon Shubuh
+├── dzuhur.png               # Icon Dzuhur
+├── ashar.png                # Icon Ashar
+├── magrib.png               # Icon Maghrib
+├── isya.png                 # Icon Isya
+│
+└── qriscode.png             # Gambar kode QRIS untuk infaq
+
+
 ## ⚙️ Teknologi yang Digunakan
 
 - **HTML5 & CSS3** — untuk struktur dan tampilan
