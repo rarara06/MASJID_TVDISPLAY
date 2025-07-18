@@ -1,16 +1,11 @@
 document.addEventListener("DOMContentLoaded", async function () {
   let jadwal = {}; // Jadwal shalat global
-  let adzanPlayedToday = {}; // Untuk mencegah adzan diputar lebih dari sekali
-
-  // Ambil elemen audio
-  const adzanAudio = document.getElementById("adzan-audio");
 
   // === Fungsi Ambil Waktu Shalat dari API ===
-
   function capitalizeFirst(text) {
     return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
   }
-  
+
   async function fetchWaktuShalat() {
     try {
       const response = await fetch("https://api.aladhan.com/v1/timingsByCity?city=Tasikmalaya&country=Indonesia&method=20");
@@ -70,38 +65,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     document.getElementById('countdown').textContent = `${hours}:${minutes}:${seconds}`;
     document.getElementById('next-shalat').textContent = capitalizeFirst(name);
-
-    // === Play Adzan ketika waktu tepat ===
-    const formattedNow = now.toTimeString().slice(0, 5); // format "HH:MM"
-    const today = now.toISOString().split('T')[0];
-
-        // Reset daily flag jika hari berganti
-    if (adzanPlayedToday.date !== today) {
-      adzanPlayedToday = { date: today, shubuh: false, dzuhur: false, ashar: false, maghrib: false, isya: false };
-    }
-
-    if (jadwal[name] === formattedNow && adzanPlayedToday[name] === false) {
-      // Play adzan
-      adzanAudio.muted = false; // aktifkan suara
-adzanAudio.play().catch((e) => {
-  console.warn("Audio tidak bisa diputar otomatis", e);
-});
-
-      adzanPlayedToday[name] = true;
-
-      // Tampilkan pesan sedang adzan
-      const label = document.querySelector(".countdown-label");
-      if (label) {
-        label.textContent = "🕌 Sedang Adzan - Mohon Hening";
-
-        // Kembalikan setelah 3 menit
-        setTimeout(() => {
-          label.innerHTML = `Waktu Menuju <span id="next-shalat">${capitalizeFirst(name)}</span>`;
-        }, 180000);
-      }
-    }
   }
-
 
   // Quotes Carousel
   const quotes = [
@@ -119,7 +83,7 @@ adzanAudio.play().catch((e) => {
   ];
 
   const carouselContainer = document.getElementById("quote-carousel");
-  carouselContainer.innerHTML = ''; // Kosongkan isi awal
+  carouselContainer.innerHTML = '';
 
   quotes.forEach((text, i) => {
     const div = document.createElement("div");
@@ -137,12 +101,7 @@ adzanAudio.play().catch((e) => {
     items[currentQuoteIndex].classList.add('active');
   }, 15000); // Ganti quote setiap 15 detik
 
-  // Inisialisasi adzanPlayedToday untuk hari ini
-  const todayDate = new Date().toISOString().split('T')[0];
-adzanPlayedToday = { date: todayDate, shubuh: false, dzuhur: false, ashar: false, maghrib: false, isya: false };
-
-
-     // === Jalankan ===
+  // === Jalankan ===
   await fetchWaktuShalat();
   setInterval(fetchWaktuShalat, 3600000); // update tiap jam
   setInterval(updateCountdown, 1000); // update detik
