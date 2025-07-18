@@ -5,17 +5,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Ambil elemen audio
   const adzanAudio = document.getElementById("adzan-audio");
 
-// === Fungsi bantu: cek toleransi 60 detik ===
-  function isWithin1Minute(prayerTimeStr) {
-    const [h, m] = prayerTimeStr.split(':');
-    const now = new Date();
-    const prayerTime = new Date();
-    prayerTime.setHours(h, m, 0, 0);
-
-    const diff = Math.abs(now - prayerTime);
-    return diff <= 60000; // 60 detik toleransi
-  }
-
   // === Fungsi Ambil Waktu Shalat dari API ===
 
   function capitalizeFirst(text) {
@@ -82,6 +71,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     document.getElementById('countdown').textContent = `${hours}:${minutes}:${seconds}`;
     document.getElementById('next-shalat').textContent = capitalizeFirst(name);
 
+    // === Play Adzan ketika waktu tepat ===
+    const formattedNow = now.toTimeString().slice(0, 5); // format "HH:MM"
     const today = now.toISOString().split('T')[0];
 
         // Reset daily flag jika hari berganti
@@ -89,18 +80,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       adzanPlayedToday = { date: today, shubuh: false, dzuhur: false, ashar: false, maghrib: false, isya: false };
     }
 
-
-  if (
-      jadwal[name] &&
-      typeof adzanPlayedToday[name] === "boolean" &&
-      isWithin1Minute(jadwal[name]) &&
-      !adzanPlayedToday[name]
-    ) {
-      adzanAudio.muted = false;
-      adzanAudio.play().catch((e) => {
-        console.warn("Audio tidak bisa diputar otomatis", e);
-      });
-
+    if (jadwal[name] === formattedNow && adzanPlayedToday[name] === false) {
+      // Play adzan
+      adzanAudio.muted = false; // aktifkan suara
+adzanAudio.play().catch((e) => {
+  console.warn("Audio tidak bisa diputar otomatis", e);
+});
 
       adzanPlayedToday[name] = true;
 
@@ -134,7 +119,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   ];
 
   const carouselContainer = document.getElementById("quote-carousel");
-  carouselContainer.innerHTML = ''; 
+  carouselContainer.innerHTML = ''; // Kosongkan isi awal
+
   quotes.forEach((text, i) => {
     const div = document.createElement("div");
     div.classList.add("quote-item");
